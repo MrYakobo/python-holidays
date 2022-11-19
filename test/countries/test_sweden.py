@@ -117,6 +117,10 @@ class TestSweden(unittest.TestCase, SundayHolidays):
         self.assertIn("2500-12-25", self.holidays)
         self.assertIn("2500-12-26", self.holidays)
 
+    def test_advent(self):
+        self.assertIn("2022-10-27", self.holidays)
+        self.assertIn("1901-12-01", self.holidays)
+
     def test_sundays(self):
         """
         Sundays are considered holidays in Sweden

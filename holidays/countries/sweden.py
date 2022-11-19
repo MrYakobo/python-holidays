@@ -87,6 +87,16 @@ class Sweden(HolidayBase):
         if year <= 2004:
             self[easter_day + rd(days=+50)] = "Annandag pingst"
 
+        # Source: http://www.ne.se/uppslagsverk/encyklopedi/enkel/advent
+        # 1st advent: 4 weeks before christmas, at sunday.
+        # 2nd advent: 3 weeks before christmas, at sunday.
+        # 3rd advent: 2 weeks before christmas, at sunday.
+        # 4th advent: 1 week  before christmas, at sunday.
+        self[date(year, DEC, 24) - rd(weeks=4) + rd(weekday=SU)] = "Första advent"
+        self[date(year, DEC, 24) - rd(weeks=3) + rd(weekday=SU)] = "Andra advent"
+        self[date(year, DEC, 24) - rd(weeks=2) + rd(weekday=SU)] = "Tredje advent"
+        self[date(year, DEC, 24) - rd(weeks=1) + rd(weekday=SU)] = "Fjärde advent"
+
         # Source:
         # https://sv.wikipedia.org/wiki/Midsommarafton
         # https://www.nordiskamuseet.se/aretsdagar/midsommarafton
