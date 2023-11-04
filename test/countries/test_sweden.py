@@ -118,8 +118,11 @@ class TestSweden(unittest.TestCase, SundayHolidays):
         self.assertIn("2500-12-26", self.holidays)
 
     def test_advent(self):
-        self.assertIn("2022-10-27", self.holidays)
-        self.assertIn("1901-12-01", self.holidays)
+        for dt in ["2022-11-27", "1901-12-01", "2023-12-03"]:
+            self.assertIn(dt, self.holidays)
+
+        for dt in ["2023-11-26"]:
+            self.assertNotIn(dt, self.holidays)
 
     def test_sundays(self):
         """

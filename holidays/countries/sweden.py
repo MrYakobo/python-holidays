@@ -88,14 +88,22 @@ class Sweden(HolidayBase):
             self[easter_day + rd(days=+50)] = "Annandag pingst"
 
         # Source: http://www.ne.se/uppslagsverk/encyklopedi/enkel/advent
-        # 1st advent: 4 weeks before christmas, at sunday.
-        # 2nd advent: 3 weeks before christmas, at sunday.
-        # 3rd advent: 2 weeks before christmas, at sunday.
-        # 4th advent: 1 week  before christmas, at sunday.
-        self[date(year, DEC, 24) - rd(weeks=4) + rd(weekday=SU)] = "Första advent"
-        self[date(year, DEC, 24) - rd(weeks=3) + rd(weekday=SU)] = "Andra advent"
-        self[date(year, DEC, 24) - rd(weeks=2) + rd(weekday=SU)] = "Tredje advent"
-        self[date(year, DEC, 24) - rd(weeks=1) + rd(weekday=SU)] = "Fjärde advent"
+        # 1st advent: 4 weeks before christmas eve, at sunday.
+        # 2nd advent: 3 weeks before christmas eve, at sunday.
+        # 3rd advent: 2 weeks before christmas eve, at sunday.
+        # 4th advent: 1 week  before christmas eve, at sunday.
+        # However, if christmas eve is on a sunday, 4th advent occurs on the same day.
+        christmas_eve_on_sunday = date(year, DEC, 24).weekday() == SU.weekday
+        if christmas_eve_on_sunday:
+            self[date(year, DEC, 24)]                                = "Fjärde advent"
+            self[date(year, DEC, 24) - rd(weeks=1) + rd(weekday=SU)] = "Tredje advent"
+            self[date(year, DEC, 24) - rd(weeks=2) + rd(weekday=SU)] = "Andra advent"
+            self[date(year, DEC, 24) - rd(weeks=3) + rd(weekday=SU)] = "Första advent"
+        else:
+            self[date(year, DEC, 24) - rd(weeks=1) + rd(weekday=SU)] = "Fjärde advent"
+            self[date(year, DEC, 24) - rd(weeks=2) + rd(weekday=SU)] = "Tredje advent"
+            self[date(year, DEC, 24) - rd(weeks=3) + rd(weekday=SU)] = "Andra advent"
+            self[date(year, DEC, 24) - rd(weeks=4) + rd(weekday=SU)] = "Första advent"
 
         # Source:
         # https://sv.wikipedia.org/wiki/Midsommarafton
